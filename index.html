@@ -57,11 +57,11 @@
 </head>
 <body>
   <!-- HEADER -->
- <header class="site-header" id="mainHeader">
+<header class="site-header" id="mainHeader">
   <div class="container header-row">
 
     <!-- LOGO -->
-    <a href="index.html" class="logo">Care<span>Plus</span></a>
+    <a href="index.html" class="logo" id="siteLogo">Care<span>Plus</span></a>
 
     <!-- HAMBURGER ICON -->
     <div class="mobile-menu-toggle" id="menuToggle">&#9776;</div>
@@ -119,13 +119,27 @@
   font-size: 28px;
   font-weight: 700;
   color: #fff;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
 }
+
+.logo span {
+  color: #00aaff;
+}
+
 .site-header.scrolled .logo {
   color: #007bff;
 }
-.logo span {
-  color: #00aaff;
+
+/* Hide logo only in mobile when not scrolled */
+@media (max-width: 768px) {
+  .logo {
+    opacity: 0;
+    visibility: hidden;
+  }
+  .site-header.scrolled .logo {
+    opacity: 1;
+    visibility: visible;
+  }
 }
 
 /* ===== NAVIGATION ===== */
@@ -235,11 +249,12 @@ document.addEventListener("DOMContentLoaded", function() {
   const menuToggle = document.getElementById("menuToggle");
   const mainNav = document.getElementById("mainNav");
 
+  // Toggle mobile menu
   menuToggle.addEventListener("click", function() {
     mainNav.classList.toggle("active");
   });
 
-  // Close menu when clicking a link (optional)
+  // Close menu when clicking a nav link
   mainNav.querySelectorAll("a").forEach(link => {
     link.addEventListener("click", () => {
       mainNav.classList.remove("active");
@@ -264,8 +279,6 @@ document.addEventListener("DOMContentLoaded", function() {
   <!-- Slides -->
   <div class="slides">
     <img src="https://picsum.photos/id/1015/1920/1080" class="slide active">
-    <!-- Add more slides if needed -->
-    <!-- <img src="images/slide2.jpg" class="slide"> -->
   </div>
 
   <!-- Overlay -->
@@ -276,15 +289,15 @@ document.addEventListener("DOMContentLoaded", function() {
     <h1>Compassionate Care. Advanced Medicine.</h1>
     <p>24/7 emergency, in-patient & outpatient services. Book an appointment or call us anytime.</p>
     <div class="hero-buttons">
-      <a href="appointment.html" class="btn-primary">Book Appointment</a>
-      <a href="services.html" class="btn-transparent">View Services</a>
+      <a href="appointment.html" class="btn btn-primary">Book Appointment</a>
+      <a href="services.html" class="btn btn-transparent">View Services</a>
     </div>
-    <div class="hero-subtext">20+ Years of Trusted Care</div>
+    <div class="trust-text">20+ Years of Trusted Care</div>
   </div>
 </section>
 
 <style>
-/* ==== HERO SLIDER BASE ==== */
+/* ===== HERO SECTION ===== */
 .hero-slider {
   position: relative;
   width: 100%;
@@ -292,7 +305,6 @@ document.addEventListener("DOMContentLoaded", function() {
   overflow: hidden;
 }
 
-/* Slides */
 .slides {
   position: relative;
   width: 100%;
@@ -300,68 +312,65 @@ document.addEventListener("DOMContentLoaded", function() {
 }
 
 .slide {
-  position: absolute;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  position: absolute;
   top: 0;
   left: 0;
+  transition: opacity 1s ease-in-out;
   opacity: 0;
-  transition: opacity 1s ease;
 }
 
 .slide.active {
   opacity: 1;
 }
 
-/* Dark overlay */
+/* Overlay for better text readability */
 .overlay {
   position: absolute;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.55);
-  z-index: 1;
+  background: rgba(0,0,0,0.5);
 }
 
-/* ==== TEXT CONTENT ==== */
+/* ===== HERO TEXT ===== */
 .hero-content {
   position: absolute;
-  top: 50%; left: 50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   color: #fff;
   text-align: center;
   max-width: 800px;
-  z-index: 2;
   padding: 0 20px;
 }
 
 .hero-content h1 {
   font-size: 48px;
   margin-bottom: 20px;
-  line-height: 1.2;
 }
 
 .hero-content p {
   font-size: 20px;
   margin-bottom: 30px;
+  line-height: 1.5;
 }
 
-.hero-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
+.hero-buttons a {
+  display: inline-block;
+  margin: 5px 10px;
+  padding: 14px 28px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .btn-primary {
   background: #007bff;
   color: #fff;
-  padding: 12px 24px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.3s;
 }
 
 .btn-primary:hover {
@@ -371,65 +380,72 @@ document.addEventListener("DOMContentLoaded", function() {
 .btn-transparent {
   border: 2px solid #fff;
   color: #fff;
-  padding: 10px 22px;
-  border-radius: 6px;
-  text-decoration: none;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 .btn-transparent:hover {
-  background: rgba(255,255,255,0.2);
+  background: #fff;
+  color: #007bff;
 }
 
-.hero-subtext {
+.trust-text {
   margin-top: 20px;
   font-weight: 600;
   color: #00aaff;
 }
 
-/* ==== RESPONSIVE STYLING ==== */
-@media (max-width: 992px) {
-  .hero-content h1 {
-    font-size: 36px;
-  }
-  .hero-content p {
-    font-size: 18px;
-  }
-}
-
+/* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) {
   .hero-slider {
-    height: 80vh; /* reduce height for small screens */
+    height: 80vh;
   }
+
   .hero-content {
+    top: 50%;
+    transform: translate(-50%, -50%);
     padding: 0 15px;
   }
+
   .hero-content h1 {
     font-size: 28px;
+    margin-bottom: 15px;
   }
+
   .hero-content p {
     font-size: 16px;
+    margin-bottom: 20px;
   }
-  .btn-primary, .btn-transparent {
-    padding: 10px 18px;
+
+  .hero-buttons a {
+    display: block;
+    width: 80%;
+    margin: 8px auto;
+    padding: 12px 0;
+    font-size: 16px;
+  }
+
+  .trust-text {
     font-size: 14px;
+    margin-top: 15px;
   }
 }
 
 @media (max-width: 480px) {
   .hero-slider {
-    height: 70vh;
+    height: 75vh;
   }
+
   .hero-content h1 {
-    font-size: 22px;
+    font-size: 24px;
   }
+
   .hero-content p {
     font-size: 14px;
-    margin-bottom: 20px;
   }
-  .hero-buttons {
-    flex-direction: column;
-    gap: 10px;
+
+  .hero-buttons a {
+    width: 90%;
+    font-size: 15px;
   }
 }
 </style>
@@ -438,7 +454,6 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener('DOMContentLoaded', () => {
   const slides = document.querySelectorAll('.slide');
   let currentSlide = 0;
-
   slides[currentSlide].classList.add('active');
 
   setInterval(() => {
@@ -449,6 +464,19 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+
+    setInterval(() => {
+      slides[currentSlide].style.opacity = 0; // Hide current slide
+      currentSlide = (currentSlide + 1) % slides.length; // Move to next
+      slides[currentSlide].style.opacity = 1; // Show next slide
+    }, 5000); // Change every 5 seconds
+  });
+</script>
 
 
   <!-- ABOUT PREVIEW -->
