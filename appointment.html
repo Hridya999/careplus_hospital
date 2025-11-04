@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Appointment | Lifecare Multispeciality Hospital</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background-color: #f5f9fc;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0077b6, #00b4d8);
+      color: #fff;
+      text-align: center;
+      padding: 70px 20px;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+
+    .appointment-section {
+      background: #fff;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #0077b6;
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+    }
+
+    .appointment-type {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .type-option {
+      flex: 1 1 220px;
+      background: #e0f7ff;
+      padding: 20px;
+      text-align: center;
+      border-radius: 12px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .type-option:hover {
+      border-color: #0077b6;
+      background: #f0fbff;
+    }
+
+    .type-option.active {
+      background: #0077b6;
+      color: #fff;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: border 0.3s;
+    }
+
+    form input:focus, form select:focus, form textarea:focus {
+      border-color: #00b4d8;
+      outline: none;
+    }
+
+    form textarea {
+      grid-column: span 2;
+    }
+
+    .form-btn {
+      grid-column: span 2;
+      text-align: center;
+    }
+
+    button {
+      background: #0077b6;
+      color: #fff;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #00b4d8;
+    }
+
+    footer {
+      background: #0077b6;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 900px) {
+      form {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Book an Appointment</h1>
+    <p>Schedule your visit with our doctors easily and securely</p>
+  </header>
+
+  <section class="container">
+    <div class="appointment-section">
+
+      <h2>Select Appointment Type</h2>
+      <div class="appointment-type" id="appointmentType">
+        <div class="type-option active" data-type="general">General Consultation</div>
+        <div class="type-option" data-type="specialist">Specialist Visit</div>
+        <div class="type-option" data-type="checkup">Health Checkup</div>
+        <div class="type-option" data-type="emergency">Emergency Visit</div>
+      </div>
+
+      <h2>Fill Appointment Details</h2>
+      <form id="appointmentForm">
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="tel" name="phone" placeholder="Phone Number" required>
+        <select name="gender" required>
+          <option value="">Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+
+        <input type="date" name="date" required>
+        <input type="time" name="time" required>
+
+        <select name="doctor" required>
+          <option value="">Select Doctor</option>
+          <option value="Dr. Anjali Nair (Cardiologist)">Dr. Anjali Nair – Cardiologist</option>
+          <option value="Dr. Rahul Menon (Orthopedic)">Dr. Rahul Menon – Orthopedic</option>
+          <option value="Dr. Priya Varghese (Pediatrician)">Dr. Priya Varghese – Pediatrician</option>
+          <option value="Dr. Sanjay Pillai (Neurologist)">Dr. Sanjay Pillai – Neurologist</option>
+        </select>
+
+        <select name="appointmentTypeSelected" id="appointmentTypeSelected" required>
+          <option value="General Consultation">General Consultation</option>
+          <option value="Specialist Visit">Specialist Visit</option>
+          <option value="Health Checkup">Health Checkup</option>
+          <option value="Emergency Visit">Emergency Visit</option>
+        </select>
+
+        <textarea name="message" rows="5" placeholder="Describe your health concern or reason for visit"></textarea>
+
+        <div class="form-btn">
+          <button type="submit">Confirm Appointment</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Lifecare Multispeciality Hospital | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // Appointment type selection interaction
+    const options = document.querySelectorAll(".type-option");
+    const selectDropdown = document.getElementById("appointmentTypeSelected");
+
+    options.forEach(option => {
+      option.addEventListener("click", () => {
+        options.forEach(o => o.classList.remove("active"));
+        option.classList.add("active");
+        selectDropdown.value = option.textContent.trim();
+      });
+    });
+
+    // (Optional) Simulated form submission
+    const form = document.getElementById("appointmentForm");
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Your appointment request has been submitted successfully!");
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>

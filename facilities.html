@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CarePlus Hospital — Facilities</title>
+  <meta name="description" content="CarePlus Hospital — Explore our hospital facilities and world-class infrastructure." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --blue-1:#007bff;
+      --blue-2:#00c6ff;
+      --muted:#6b7280;
+      --card-shadow:0 6px 18px rgba(16,24,40,0.08);
+      --radius:12px;
+      font-family: 'Inter', sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;color:#222;background:#fff;line-height:1.6}
+    a{color:var(--blue-1); text-decoration:none}
+    .container{max-width:1180px;margin:0 auto;padding:0 20px}
+
+    /* Header */
+    .site-header{background:#fff;padding:16px 0;box-shadow:0 2px 6px rgba(0,0,0,0.05);position:sticky;top:0;z-index:50}
+    .header-row{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .logo{font-weight:700;font-size:22px;color:var(--blue-1)}
+    .main-nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
+    .main-nav a{color:#333;padding:6px 8px;border-radius:6px}
+    .main-nav a:hover{background:rgba(0,123,255,0.08)}
+
+    /* Hero */
+    .hero-banner {
+      height: 55vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      background: url("images/facility-banner.jpg") center/cover no-repeat;
+      position: relative;
+    }
+    .hero-banner::after {
+      content:"";
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,0.5);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    .hero-content h1 {
+      font-size: 42px;
+      margin:0 0 12px;
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      margin:0;
+    }
+
+    /* Facilities Grid */
+    .facilities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+    .facility-card {
+      background:#fff;
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:var(--card-shadow);
+      transition:transform .3s;
+    }
+    .facility-card:hover {transform:translateY(-8px)}
+    .facility-card img {
+      width:100%;
+      height:200px;
+      object-fit:cover;
+    }
+    .facility-info {
+      padding:20px;
+    }
+    .facility-info h3 {
+      margin:0 0 8px;
+      font-size:1.3rem;
+      color:var(--blue-1);
+    }
+    .facility-info p {
+      margin:0;
+      font-size:0.95rem;
+      color:var(--muted);
+    }
+
+    /* Quick features */
+    .quick-features {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:30px;
+      margin-top:60px;
+    }
+    .quick-features div {
+      text-align:center;
+      width:150px;
+    }
+    .quick-features i {
+      font-size:2.5rem;
+      color:var(--blue-1);
+      margin-bottom:10px;
+    }
+    .quick-features p {
+      margin:0;
+      font-weight:600;
+      color:#333;
+    }
+
+    /* CTA strip */
+    .cta-strip {
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      background:linear-gradient(90deg,var(--blue-1),var(--blue-2));
+      color:#fff;
+      padding:26px;
+      border-radius:12px;
+      margin:60px 0;
+    }
+    .cta-strip p {margin:0;font-weight:600}
+    .cta-strip .cta-actions{display:flex;gap:12px}
+    .btn {
+      display:inline-block;
+      padding:12px 22px;
+      border-radius:8px;
+      font-weight:600;
+      text-decoration:none;
+    }
+    .btn-primary {background:#fff;color:var(--blue-1)}
+    .btn-outline {background:transparent;border:2px solid #fff;color:#fff}
+
+    /* Footer */
+    footer.site-footer {
+      background: linear-gradient(135deg, #007bff, #00c6ff);
+      padding:50px 20px;
+      color:#fff;
+    }
+    .footer-row {
+      display:flex;
+      flex-wrap:wrap;
+      gap:20px;
+      align-items:center;
+      justify-content:space-between;
+      max-width:1180px;
+      margin:0 auto;
+    }
+    .footer-row p {margin:0}
+    .footer-links {display:flex;gap:18px;list-style:none;margin:0;padding:0}
+    .footer-links a {color:#fff;opacity:0.95}
+
+    @media (max-width:800px){
+      .footer-row{flex-direction:column;align-items:flex-start}
+      .cta-strip{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-row">
+      <a href="index.html" class="logo">Care<span style="color:#00c6ff">Plus</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="facilities.html" style="font-weight:700">Facilities</a></li>
+          <li><a href="contact_page.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="appointments.html" class="btn btn-primary" style="background:var(--blue-1);color:#fff">Book Appointment</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero-banner">
+  <div class="hero-content">
+    <h1>Our Facilities</h1>
+    <p>World-class infrastructure designed for your comfort and care</p>
+  </div>
+</section>
+
+<style>
+.hero-banner {
+  position: relative;
+  background-image: url("images/facility.jpg"); /* 👈 Your image path here */
+  background-size: cover;          /* Makes the image fill the entire section */
+  background-position: center;     /* Centers the image */
+  background-repeat: no-repeat;    /* Avoids repeating pattern */
+  height: 60vh;                    /* Adjust height as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Optional dark overlay for better text readability */
+.hero-banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45); /* semi-transparent overlay */
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-content h1 {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+}
+</style>
+
+
+  <!-- MAIN CONTENT -->
+  <main class="container" style="padding:60px 0">
+    <h2 style="text-align:center;font-size:2rem;color:#111;margin-bottom:20px">Explore Our World-Class Facilities</h2>
+    <p style="text-align:center;max-width:800px;margin:0 auto 40px;color:var(--muted)">At CarePlus Hospital, we ensure that our facilities are equipped with the latest technology and designed to provide patients with the highest standards of safety, comfort, and care.</p>
+
+    <!-- Facilities Grid -->
+    <div class="facilities-grid">
+      <div class="facility-card">
+        <a href="facility_detail_page.html">
+  <img src="images/icu.jpg" alt="ICU" style="width:100%; height:auto; cursor:pointer; border-radius:10px;">
+</a>
+
+        <div class="facility-info">
+          <h3>Advanced ICCU</h3>
+          <p>Critical care unit equipped with life-support and advanced monitoring systems.</p>
+        </div>
+      </div>
+      <div class="facility-card">
+        <img src="images/lab.jpg" alt="Diagnostic Lab">
+        <div class="facility-info">
+          <h3>Diagnostic Laboratory</h3>
+          <p>24/7 lab services with automated testing for fast and accurate results.</p>
+        </div>
+      </div>
+      <div class="facility-card">
+        <img src="images/inhouse_pharmasy.webp" alt="Pharmacy">
+        <div class="facility-info">
+          <h3>In-house Pharmacy</h3>
+          <p>Fully stocked pharmacy ensuring availability of essential medicines around the clock.</p>
+        </div>
+      </div>
+      <div class="facility-card">
+        <img src="images/private_room.jpg" alt="Patient Rooms">
+        <div class="facility-info">
+          <h3>Private Patient Rooms</h3>
+          <p>Comfortable, hygienic, and fully furnished patient wards and private rooms.</p>
+        </div>
+      </div>
+       <div class="facility-card">
+        <img src="images/birth_spacing.webp" alt="Pharmacy">
+        <div class="facility-info">
+          <h3>Birth Spacing</h3>
+          <p>Fully stocked pharmacy ensuring availability of essential medicines around the clock.</p>
+        </div>
+      </div>
+       <div class="facility-card">
+        <img src="images/out_patient_clinic.jpg" alt="Pharmacy">
+        <div class="facility-info">
+          <h3>Out Patient Clinic</h3>
+          <p>Fully stocked pharmacy ensuring availability of essential medicines around the clock.</p>
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- Quick Features -->
+    <div class="quick-features">
+      <div>
+        <i class="fas fa-ambulance"></i>
+        <p>24/7 Ambulance</p>
+      </div>
+      <div>
+        <i class="fas fa-wifi"></i>
+        <p>Free WiFi</p>
+      </div>
+      <div>
+        <i class="fas fa-utensils"></i>
+        <p>Cafeteria</p>
+      </div>
+      <div>
+        <i class="fas fa-user-nurse"></i>
+        <p>24/7 Nursing</p>
+      </div>
+    </div>
+
+    <!-- CTA Strip -->
+    <div class="cta-strip">
+      <div>
+        <p>Need assistance or want to book a tour of our facilities?</p>
+        <div style="font-weight:700;margin-top:6px">📞 +91 98765 43210</div>
+      </div>
+      <div class="cta-actions">
+        <a href="appointments.html" class="btn btn-primary">Book Appointment</a>
+        <a href="contact.html" class="btn btn-outline">Contact Us</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <p>&copy; <span id="year"></span> CarePlus Hospital. All rights reserved.</p>
+      <nav aria-label="Footer">
+        <ul class="footer-links">
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="terms.html">Terms</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

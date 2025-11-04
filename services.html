@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CarePlus Hospital — Services</title>
+  <meta name="description" content="CarePlus Hospital — Our medical services and specialties." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --blue-1:#007bff;
+      --blue-2:#00c6ff;
+      --muted:#6b7280;
+      --card-shadow: 0 6px 18px rgba(16,24,40,0.08);
+      --radius:12px;
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;color:#222;background:#fff;line-height:1.5}
+    a{color:var(--blue-1); text-decoration:none}
+    .container{max-width:1180px;margin:0 auto;padding:0 20px}
+
+    /* Header */
+    .site-header{background:#fff;padding:16px 0;box-shadow:0 2px 6px rgba(0,0,0,0.05);position:sticky;top:0;z-index:50}
+    .header-row{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .logo{font-weight:700;font-size:22px;color:var(--blue-1)}
+    .main-nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
+    .main-nav a{color:#333;padding:6px 8px;border-radius:6px}
+    .main-nav a:hover{background:rgba(0,123,255,0.08)}
+
+    /* Hero */
+    .hero{display:flex;align-items:center;gap:30px;padding:64px 0;background:linear-gradient(180deg,#f7fdff,#ffffff)}
+    .hero-left{flex:1;min-width:280px}
+    .hero-left h1{font-size:38px;margin:0 0 12px}
+    .hero-left p{color:var(--muted);margin:0 0 20px}
+    .btn{display:inline-block;padding:12px 22px;border-radius:8px;font-weight:600;cursor:pointer}
+    .btn-primary{background:var(--blue-1);color:#fff}
+    .btn-outline{background:transparent;border:2px solid var(--blue-1);color:var(--blue-1)}
+    .hero-right{flex:1;text-align:center}
+    .hero-right img{max-width:100%;border-radius:14px;box-shadow:var(--card-shadow)}
+
+    /* Services grid */
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:30px}
+    .service-card{background:#fff;border-radius:12px;padding:20px;text-align:center;box-shadow:var(--card-shadow);transition:transform .35s ease, box-shadow .35s ease}
+    .service-card:hover{transform:translateY(-12px) scale(1.03);box-shadow:0 12px 24px rgba(0,0,0,0.15)}
+    .service-card .media{width:100%;height:160px;border-radius:10px;overflow:hidden;margin-bottom:14px}
+    .service-card img{width:100%;height:100%;object-fit:cover;display:block}
+    .service-card h3{margin:8px 0;font-size:18px;color:var(--blue-1)}
+    .service-card p{color:var(--muted);font-size:0.95rem;margin:6px 0 0}
+
+    /* Accordion */
+    .accordion{margin-top:30px}
+    .acc-item{border-radius:10px;background:#fff;box-shadow:var(--card-shadow);margin-bottom:12px;overflow:hidden}
+    .acc-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;cursor:pointer}
+    .acc-head h4{margin:0;font-size:16px;color:var(--blue-1)}
+    .acc-body{padding:0 18px;color:var(--muted);max-height:0;overflow:hidden;transition:max-height 0.4s ease, padding 0.3s ease}
+
+    /* CTA strip */
+    .cta-strip{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(90deg,var(--blue-1),var(--blue-2));color:#fff;padding:26px;border-radius:12px;margin:40px 0;opacity:0;transform:translateY(40px);animation:fadeUp 1s ease forwards 0.6s}
+    .cta-strip p{margin:0;font-weight:600}
+    .cta-strip .cta-actions{display:flex;gap:12px}
+
+    /* Footer */
+    footer.site-footer{background: linear-gradient(135deg, #007bff, #00c6ff); padding:50px 20px; color:#fff}
+    .footer-row{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;max-width:1180px;margin:0 auto}
+    .footer-row p{margin:0}
+    .footer-links{display:flex;gap:18px;list-style:none;margin:0;padding:0}
+    .footer-links a{color:#fff;opacity:0.95}
+
+    /* === Animations === */
+    @keyframes fadeUp {
+      to {opacity:1;transform:translateY(0);}
+    }
+
+    /* Hero fade-in */
+    .hero-left, .hero-right {
+      opacity:0; transform:translateY(40px); animation:fadeUp 1s ease forwards;
+    }
+    .hero-right { animation-delay:0.3s; }
+
+    /* Services stagger animation */
+    .service-card {opacity:0; transform:translateY(30px); animation:fadeUp 0.8s ease forwards;}
+    .service-card:nth-child(1){animation-delay:0.2s}
+    .service-card:nth-child(2){animation-delay:0.4s}
+    .service-card:nth-child(3){animation-delay:0.6s}
+    .service-card:nth-child(4){animation-delay:0.8s}
+    .service-card:nth-child(5){animation-delay:1s}
+    .service-card:nth-child(6){animation-delay:1.2s}
+    .service-card:nth-child(7){animation-delay:1.4s}
+    .service-card:nth-child(8){animation-delay:1.6s}
+
+    /* Responsive */
+    @media (max-width:800px){
+      .hero{flex-direction:column;padding:36px 0}
+      .cta-strip{flex-direction:column;align-items:flex-start}
+      .footer-row{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-row">
+      <a href="index.html" class="logo">Care<span style="color:#00c6ff">Plus</span></a>
+      <nav class="main-nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html" style="font-weight:700">Services</a></li>
+          <li><a href="facilities.html">Facilities</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a href="appointments.html" class="btn btn-primary">Book Appointment</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section class="hero">
+      <div class="container hero-inner" style="display:flex;gap:30px;align-items:center">
+        <div class="hero-left">
+          <h1>Our Medical Services</h1>
+          <p>Comprehensive care across specialties — emergency, diagnostics, surgery, maternity and more. Choose a service to learn more or book an appointment.</p>
+          <div style="display:flex;gap:12px;margin-top:16px">
+            <a href="appointments.html" class="btn btn-primary">Book Appointment</a>
+            <a href="contact.html" class="btn btn-outline">Contact Us</a>
+          </div>
+        </div>
+        <div class="hero-right">
+          <img src="images/service11.webp" alt="Hospital services image">
+        </div>
+      </div>
+    </section>
+
+    <div class="container" style="padding:40px 0">
+      <!-- Services cards -->
+      <h2 style="margin:0 0 18px;color:#111">Our Key Services</h2>
+      <p style="color:var(--muted);margin:0 0 20px">High-quality care delivered by expert teams using advanced technology.</p>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="media"><img src="images/emergency.jpg" alt="Emergency"></div>
+          <h3>Emergency Care</h3>
+          <p>24/7 emergency department with a dedicated trauma team and swift response.</p>
+        </div>
+        <div class="service-card">
+          <div class="media"><img src="images/cardio.jpg" alt="Cardiology"></div>
+          <h3>Cardiology</h3>
+          <p>Advanced cardiac diagnostics, interventions and post-operative care.</p>
+        </div>
+        <div class="service-card">
+          <div class="media"><img src="images/pediatric.webp" alt="Pediatrics"></div>
+          <h3>Pediatrics</h3>
+          <p>Child-friendly pediatric care — from newborns to adolescents.</p>
+        </div>
+        <div class="service-card">
+          <div class="media"><img src="images/ortho2.jpg" alt="Orthopedics"></div>
+          <h3>Orthopedics</h3>
+          <p>Joint replacement, sports injury management and rehabilitation services.</p>
+        </div>
+        <div class="service-card">
+          <div class="media"><img src="images/meternity.jpg" alt="Maternity & OBGYN"></div>
+          <h3>Maternity & OBGYN</h3>
+          <p>Comprehensive maternal care, prenatal services, and modern delivery suites.</p>
+        </div>
+        <div class="service-card">
+          <div class="media"><img src="images/radio.jpg" alt="Radiology"></div>
+          <h3>Radiology & Imaging</h3>
+          <p>State-of-the-art imaging services — MRI, CT, X-ray and ultrasound.</p>
+        </div>
+        <div class="service-card">
+          <div class="media"><img src="images/opthan.jpg" alt="Ophthalmology"></div>
+          <h3>Ophthalmology</h3>
+          <p>Eye care services including cataract, LASIK, and retina treatments.</p>
+        </div>
+        <div class="service-card">
+          <div class="media"><img src="images/cardiology.jpg" alt="Neurology"></div>
+          <h3>Neurology</h3>
+          <p>Comprehensive neurological care including stroke and epilepsy management.</p>
+        </div>
+      </div>
+
+      <!-- Accordion -->
+      <div class="accordion">
+        <div class="acc-item">
+          <div class="acc-head" data-target="acc1">
+            <h4>Comprehensive Emergency Care</h4>
+            <span>+</span>
+          </div>
+          <div class="acc-body" id="acc1">
+            <p>Our emergency department is staffed 24/7 with specialists, equipped with critical care units, rapid triage systems and on-site diagnostics to provide life-saving treatment fast.</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-head" data-target="acc2">
+            <h4>Cardiac Clinic & Interventions</h4>
+            <span>+</span>
+          </div>
+          <div class="acc-body" id="acc2">
+            <p>We offer non-invasive cardiac tests, cath lab procedures, electrophysiology services and cardiac rehab programs to support full recovery.</p>
+          </div>
+        </div>
+        <div class="acc-item">
+          <div class="acc-head" data-target="acc3">
+            <h4>Maternity & Neonatal Care</h4>
+            <span>+</span>
+          </div>
+          <div class="acc-body" id="acc3">
+            <p>From prenatal counseling to postnatal support, our OBGYN and neonatal teams ensure safe deliveries and excellent newborn care.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Strip -->
+      <div class="cta-strip">
+        <div>
+          <p style="margin:0;font-size:18px">Need care now? Book an appointment or call our helpline</p>
+          <div style="font-weight:700;margin-top:6px">📞 +91 98765 43210</div>
+        </div>
+        <div class="cta-actions">
+          <a href="appointments.html" class="btn btn-primary">Book Appointment</a>
+          <a href="contact.html" class="btn btn-outline" style="background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.25)">Contact</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <p>&copy; <span id="year"></span> CarePlus Hospital. All rights reserved.</p>
+      <nav aria-label="Footer">
+        <ul class="footer-links">
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="terms.html">Terms</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Accordion toggle
+    document.querySelectorAll('.acc-head').forEach(head=>{
+      head.addEventListener('click', ()=>{
+        const id = head.getAttribute('data-target');
+        const body = document.getElementById(id);
+        const open = body.style.maxHeight && body.style.maxHeight !== "0px";
+        document.querySelectorAll('.acc-body').forEach(b => {b.style.maxHeight="0"; b.style.paddingBottom="0"});
+        document.querySelectorAll('.acc-head span').forEach(s => s.textContent = '+');
+        if(!open){
+          body.style.maxHeight = body.scrollHeight + "px";
+          body.style.paddingBottom="18px";
+          head.querySelector('span').textContent = '−';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+

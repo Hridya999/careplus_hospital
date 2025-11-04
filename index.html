@@ -1,0 +1,827 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CarePlus Hospital</title>
+  <meta name="description" content="CarePlus Hospital — quality care, 24/7. Book appointments, meet our doctors." />
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="scripts.js"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; margin:0; padding:0; }
+    .btn-transparent {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+    .btn-transparent:hover {
+      background: #007bff;
+      color: white;
+    }
+    .hero-video { position:relative; width:100%; height:100vh; overflow:hidden; }
+    .hero-video video { width:100%; height:100%; object-fit:cover; }
+    .hero-video .overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); }
+    .hero-video .content { position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); color:white; text-align:center; max-width:800px; }
+    .hero-video .content h1 { font-size:48px; margin-bottom:20px; font-weight:700; }
+    .hero-video .content p { font-size:20px; margin-bottom:30px; }
+    .cards-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap:20px; margin-top:20px; }
+    .card { padding:20px; border-radius:8px; background:white; text-align:center; box-shadow:0 4px 10px rgba(0,0,0,0.1); transition:0.3s; }
+    .card:hover { box-shadow:0 8px 20px rgba(0,0,0,0.2); }
+    .testimonial-slider { display:flex; overflow-x:auto; gap:20px; scroll-behavior:smooth; padding-bottom:20px; }
+    .testimonial-slider::-webkit-scrollbar { display:none; }
+    .doctor-card img { width:100%; border-radius:8px; margin-bottom:15px; }
+    .facilities-gallery img { width:100%; border-radius:8px; transition:0.3s; cursor:pointer; }
+    .facilities-gallery img:hover { transform:scale(1.05); }
+    .ad-banner { background:#00aaff; color:white; padding:60px 20px; text-align:center; border-radius:8px; margin:40px 0; }
+    .ad-banner a { background:white; color:#00aaff; padding:14px 28px; border-radius:6px; text-decoration:none; font-weight:600; transition:0.3s; }
+    .ad-banner a:hover { background:#007bff; color:white; }
+    
+  </style>
+  <!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+<!-- Swiper JS (at the end of body) -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+</head>
+<body>
+  <!-- HEADER -->
+ <header class="site-header" id="mainHeader">
+  <div class="container header-row">
+    
+    <!-- LOGO -->
+    <a href="index.html" class="logo">Care<span>Plus</span></a>
+
+    <!-- HAMBURGER MENU TOGGLE -->
+    <div class="mobile-menu-toggle" onclick="toggleMenu()">&#9776;</div>
+
+    <!-- NAVIGATION -->
+    <nav class="main-nav" aria-label="Primary">
+      <ul id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="facilities.html">Facilities</a></li>
+        <li><a href="contact_page.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- HEADER ACTION BUTTON -->
+    <div class="header-actions">
+      <a href="appointment.html" class="btn btn-primary">Book Appointment</a>
+    </div>
+
+  </div>
+</header>
+
+<style>
+/* ===== BASE HEADER ===== */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: transparent; /* Transparent initially */
+  padding: 15px 20px;
+  transition: all 0.4s ease;
+  z-index: 1000;
+}
+
+.site-header.scrolled {
+  background: #fff; /* Solid background when scrolled */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff; /* White for transparent mode */
+  transition: color 0.3s ease;
+}
+
+.site-header.scrolled .logo {
+  color: #007bff; /* Blue when scrolled */
+}
+
+.logo span {
+  color: #00aaff;
+}
+
+/* ===== NAVIGATION ===== */
+.main-nav ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav ul li a {
+  text-decoration: none;
+  color: #fff; /* White initially */
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.site-header.scrolled .main-nav ul li a {
+  color: #000; /* Black text after scroll */
+}
+
+/* ===== BUTTON ===== */
+.header-actions .btn-primary {
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  background: #007bff;
+  color: #fff;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.header-actions .btn-primary:hover {
+  background: #0056b3;
+}
+
+/* ===== MOBILE MENU ===== */
+.mobile-menu-toggle {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.site-header.scrolled .mobile-menu-toggle {
+  color: #000;
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .main-nav ul {
+    display: none;
+    flex-direction: column;
+    background: #fff;
+    position: absolute;
+    top: 65px;
+    right: 0;
+    width: 100%;
+    padding: 10px 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+
+  .main-nav ul.show {
+    display: flex;
+  }
+
+  .main-nav ul li {
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .header-actions {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: block;
+  }
+}
+</style>
+
+<script>
+function toggleMenu() {
+  const nav = document.getElementById('nav-links');
+  nav.classList.toggle('show');
+}
+
+// Header scroll effect
+window.addEventListener('scroll', function() {
+  const header = document.getElementById('mainHeader');
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+</script>
+
+
+
+
+  <!-- HERO VIDEO SECTION -->
+ <!-- HERO IMAGE SLIDER -->
+<section class="hero-slider" style="position:relative; width:100%; height:100vh; overflow:hidden;">
+  <!-- Slides -->
+  <div class="slides" style="position:relative; width:100%; height:100%;">
+    
+    <img src="https://picsum.photos/id/1015/1920/1080" class="slide" style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0; transition:opacity 1s; opacity:0;">
+  </div>
+
+  <!-- Overlay for text clarity -->
+  <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5);"></div>
+
+  <!-- Text content -->
+  <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); color:white; text-align:center; max-width:800px;">
+    <h1 style="font-size:48px; margin-bottom:20px;">Compassionate Care. Advanced Medicine.</h1>
+    <p style="font-size:20px; margin-bottom:30px;">24/7 emergency, in-patient & outpatient services. Book an appointment or call us anytime.</p>
+    <a href="appointment.html" class="btn btn-primary" style="padding:14px 28px; border-radius:6px; margin-right:15px;">Book Appointment</a>
+    <a href="services.html" class="btn btn-transparent">View Services</a>
+    <div style="margin-top:20px; font-weight:600; color:#00aaff;">20+ Years of Trusted Care</div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+
+    setInterval(() => {
+      slides[currentSlide].style.opacity = 0; // Hide current slide
+      currentSlide = (currentSlide + 1) % slides.length; // Move to next
+      slides[currentSlide].style.opacity = 1; // Show next slide
+    }, 5000); // Change every 5 seconds
+  });
+</script>
+
+
+  <!-- ABOUT PREVIEW -->
+  
+
+  <!-- SERVICES PREVIEW -->
+  <section class="services-preview section" style="position: relative; padding: 60px 20px; background: #f9f9f9; overflow: hidden;">
+  
+  <!-- Left Watermark -->
+  <img src="images/stethascope.jpg" alt="Hospital Icon Left" class="watermark-left">
+  
+  <!-- Right Watermark -->
+  <img src="images/hospital_water_mark_2.png" alt="Hospital Icon Right" class="watermark-right">
+
+  <div class="container" style="max-width:1200px; margin:0 auto; position: relative; z-index: 2;">
+    <h2 style="text-align:center; color:#007bff;">Our Key Services</h2>
+
+    <!-- Scrollable Cards -->
+    <div class="cards-grid">
+      
+      <article class="card">
+        <div class="img-box">
+          <a href="services.html">
+            <img src="images/service4.png" alt="Emergency Care">
+          </a>
+        </div>
+        <h3>Emergency Care</h3>
+        <p>24/7 emergency with experienced trauma team.</p>
+      </article>
+
+      <article class="card">
+        <div class="img-box">
+          <a href="services.html">
+            <img src="images/service3.jpg" alt="Neurology">
+          </a>
+        </div>
+        <h3>Neurology</h3>
+        <p>Advanced neurological diagnostics and care.</p>
+      </article>
+
+      <article class="card">
+        <div class="img-box">
+          <a href="services.html">
+            <img src="images/neurology.jpg" alt="Cardiology">
+          </a>
+        </div>
+        <h3>Cardiology</h3>
+        <p>Advanced cardiac diagnostics and interventions.</p>
+      </article>
+
+      <article class="card">
+        <div class="img-box">
+          <a href="emergency.html">
+            <img src="images/service1.jpg" alt="Pediatrics">
+          </a>
+        </div>
+        <h3>Pediatrics</h3>
+        <p>Child-friendly care from newborn to teen.</p>
+      </article>
+    </div>
+
+    <div style="text-align:center; margin-top:30px;">
+      <a href="services.html" class="btn btn-transparent">View All Services</a>
+    </div>
+  </div>
+</section>
+
+<style>
+/* === Section Styling === */
+.services-preview {
+  position: relative;
+  background: #f9f9f9;
+  overflow: hidden;
+}
+
+/* === Watermark Images === */
+.watermark-left,
+.watermark-right {
+  position: absolute;
+  opacity: 0.25; /* slightly darker watermark */
+  width: 250px;
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.watermark-left {
+  top: 30px;
+  left: 40px;
+  transform: rotate(-10deg);
+}
+
+.watermark-right {
+  bottom: 20px;
+  right: 40px;
+  width: 400px;
+  height: 300px;
+  object-fit: cover;
+  transform: rotate(15deg);
+}
+
+/* === Cards Layout === */
+.services-preview .cards-grid {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 10px;
+  margin-top: 20px;
+}
+
+.services-preview .card {
+  flex: 0 0 300px;
+  scroll-snap-align: start;
+  background: #fff;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+  transition: transform 0.3s ease;
+}
+
+.services-preview .card:hover {
+  transform: translateY(-5px);
+}
+
+/* === Image Box (Uniform Size) === */
+.services-preview .img-box {
+  width: 100%;
+  height: 220px; /* fixed height for consistency */
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.services-preview .img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures consistent size and fills box neatly */
+  border-radius: 8px;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.services-preview .img-box img:hover {
+  transform: scale(1.05);
+}
+
+.services-preview .cards-grid::-webkit-scrollbar {
+  display: none; /* Hide scrollbar */
+}
+</style>
+
+
+  <!-- DOCTORS PREVIEW -->
+<section class="doctors-preview section" style="padding:80px 20px; background:#f4faff;">
+  
+  <div class="container">
+    <h2 style="text-align:center; margin-bottom:50px; font-size:32px; color:#007bff;">Meet Our Specialists</h2>
+
+    <!-- Swiper Container -->
+    <div class="swiper doctors-swiper">
+      <div class="swiper-wrapper">
+
+        <!-- Doctor Card -->
+        <article class="swiper-slide" style="position:relative; overflow:hidden; border-radius:15px; box-shadow:0 8px 20px rgba(0,0,0,0.15); transition:transform 0.3s; background:#fff;">
+          <img src="images/doct_2.jpg" alt="Dr. Anita Sharma" style="width:100%; height:350px; object-fit:cover; display:block;">
+          <div style="position:absolute; bottom:0; left:0; right:0; background:rgba(0,0,0,0.6); color:#fff; padding:20px; text-align:center;">
+            <h3 style="margin:0; font-size:20px;">Dr. Anita Sharma</h3>
+            <p style="margin:5px 0 0; font-size:16px;">Cardiologist</p>
+          </div>
+        </article>
+
+        <!-- Doctor Card -->
+        <article class="swiper-slide" style="position:relative; overflow:hidden; border-radius:15px; box-shadow:0 8px 20px rgba(0,0,0,0.15); transition:transform 0.3s; background:#fff;">
+          <img src="images/doct_1.jpg" alt="Dr. Rajesh Kumar" style="width:100%; height:350px; object-fit:cover; display:block;">
+          <div style="position:absolute; bottom:0; left:0; right:0; background:rgba(0,0,0,0.6); color:#fff; padding:20px; text-align:center;">
+            <h3 style="margin:0; font-size:20px;">Dr. Rajesh Kumar</h3>
+            <p style="margin:5px 0 0; font-size:16px;">Pediatrician</p>
+          </div>
+        </article>
+
+        <!-- Doctor Card -->
+        <article class="swiper-slide" style="position:relative; overflow:hidden; border-radius:15px; box-shadow:0 8px 20px rgba(0,0,0,0.15); transition:transform 0.3s; background:#fff;">
+          <img src="images/doct_2.jpg" alt="Dr. Anita Sharma" style="width:100%; height:350px; object-fit:cover; display:block;">
+          <div style="position:absolute; bottom:0; left:0; right:0; background:rgba(0,0,0,0.6); color:#fff; padding:20px; text-align:center;">
+            <h3 style="margin:0; font-size:20px;">Dr. Anita Sharma</h3>
+            <p style="margin:5px 0 0; font-size:16px;">Cardiologist</p>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Optional Navigation -->
+      <!-- Custom Navigation Arrows -->
+<div class="swiper-button-next custom-arrow"></div>
+<div class="swiper-button-prev custom-arrow"></div>
+
+      <div class="swiper-pagination"></div>
+    </div>
+
+    <div style="text-align:center; margin-top:40px;">
+      <a href="doctor_detailpage.html" class="btn btn-transparent" style="padding:12px 25px; border:2px solid #00aaff; color:#00aaff; font-weight:bold; border-radius:30px; transition:0.3s;">Meet All Doctors</a>
+    </div>
+  </div>
+</section>
+<style>
+  /* Small, modern arrows */
+  .custom-arrow {
+    width: 35px;
+    height: 35px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 18px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .custom-arrow:hover {
+    background-color: #007bff;
+  }
+
+  .swiper-button-next.custom-arrow {
+    right: 10px;
+  }
+
+  .swiper-button-prev.custom-arrow {
+    left: 10px;
+  }
+
+  /* Use CSS arrows */
+  .swiper-button-next.custom-arrow::after {
+    content: '›'; /* Right arrow */
+  }
+
+  .swiper-button-prev.custom-arrow::after {
+    content: '‹'; /* Left arrow */
+  }
+</style>
+
+
+<script>
+  const swiper = new Swiper('.doctors-swiper', {
+    slidesPerView: 1,
+    spaceBetween: 30,
+    loop: true,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next.custom-arrow',
+      prevEl: '.swiper-button-prev.custom-arrow',
+    },
+    breakpoints: {
+      640: { slidesPerView: 1 },
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+    }
+  });
+</script>
+
+
+
+<!-- Hover Effect -->
+<style>
+  .doctor-card:hover {
+    transform: translateY(-12px);
+  }
+</style>
+
+
+  <!-- TESTIMONIALS -->
+ <section class="testimonials section" style="padding:80px 20px; background:linear-gradient(135deg, #e0f7ff, #f0f8ff);">
+  <div class="container" style="max-width:1200px; margin:0 auto; text-align:center;">
+    <h2 style="margin-bottom:50px; font-size:32px; color:#007bff;">What Our Patients Say</h2>
+
+    <!-- Carousel Wrapper -->
+    <div class="carousel-wrapper" style="position:relative; overflow:hidden; width:95%; max-width:1100px; margin:0 auto;">
+      <div class="carousel-track" style="display:flex; transition:transform 0.8s ease;">
+        
+        <!-- Review 1 -->
+        <article class="testimonial" style="min-width:100%; background:white; border-radius:20px; padding:50px 40px; box-shadow:0 8px 25px rgba(0,0,0,0.1);">
+          <img src="images/patient.jpg" alt="Ramesh K." style="width:90px; height:90px; border-radius:50%; object-fit:cover; margin-bottom:25px; border:4px solid #00aaff;">
+          <p style="font-style:italic; color:#444; font-size:17px;">"The doctors here saved my father’s life. Very caring staff and excellent facilities!"</p>
+          <div style="color:#f4c150; margin:15px 0; font-size:18px;">★★★★★</div>
+          <p style="margin:0; font-weight:bold; color:#222; font-size:16px;">— Ramesh K.</p>
+        </article>
+
+        <!-- Review 2 -->
+        <article class="testimonial" style="min-width:100%; background:white; border-radius:20px; padding:50px 40px; box-shadow:0 8px 25px rgba(0,0,0,0.1);">
+          <img src="images/patient2.jpg" alt="Anjali S." style="width:90px; height:90px; border-radius:50%; object-fit:cover; margin-bottom:25px; border:4px solid #00aaff;">
+          <p style="font-style:italic; color:#444; font-size:17px;">"Best pediatric care for my child, friendly doctors and nurses."</p>
+          <div style="color:#f4c150; margin:15px 0; font-size:18px;">★★★★★</div>
+          <p style="margin:0; font-weight:bold; color:#222; font-size:16px;">— Anjali S.</p>
+        </article>
+
+        <!-- Review 3 -->
+        <article class="testimonial" style="min-width:100%; background:white; border-radius:20px; padding:50px 40px; box-shadow:0 8px 25px rgba(0,0,0,0.1);">
+          <img src="images/patient3.jpg" alt="Vikram P." style="width:90px; height:90px; border-radius:50%; object-fit:cover; margin-bottom:25px; border:4px solid #00aaff;">
+          <p style="font-style:italic; color:#444; font-size:17px;">"Highly professional cardiology team, I feel safe in their hands."</p>
+          <div style="color:#f4c150; margin:15px 0; font-size:18px;">★★★★★</div>
+          <p style="margin:0; font-weight:bold; color:#222; font-size:16px;">— Vikram P.</p>
+        </article>
+      </div>
+
+      <!-- Bullets -->
+      <div class="carousel-dots" style="text-align:center; margin-top:25px;">
+        <span class="dot active" style="height:12px; width:12px; margin:0 5px; background-color:#007bff; border-radius:50%; display:inline-block; cursor:pointer;"></span>
+        <span class="dot" style="height:12px; width:12px; margin:0 5px; background-color:#bbb; border-radius:50%; display:inline-block; cursor:pointer;"></span>
+        <span class="dot" style="height:12px; width:12px; margin:0 5px; background-color:#bbb; border-radius:50%; display:inline-block; cursor:pointer;"></span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const track = document.querySelector('.carousel-track');
+    const dots = document.querySelectorAll('.dot');
+    let index = 0;
+    const total = dots.length;
+
+    function showSlide(i) {
+      track.style.transform = `translateX(-${i * 100}%)`;
+      dots.forEach(dot => dot.style.backgroundColor = '#bbb');
+      dots[i].style.backgroundColor = '#007bff';
+    }
+
+    function autoSlide() {
+      index = (index + 1) % total;
+      showSlide(index);
+    }
+
+    let slideInterval = setInterval(autoSlide, 4000);
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        index = i;
+        showSlide(index);
+        clearInterval(slideInterval);
+        slideInterval = setInterval(autoSlide, 4000);
+      });
+    });
+  </script>
+</section>
+
+
+
+  <!-- FACILITIES GALLERY -->
+  <section class="facilities-gallery section" style="padding:60px 20px;">
+  <div class="container">
+    <h2 style="text-align:center; margin-bottom:40px; color:#007bff;">Our Facilities</h2>
+
+    <div class="gallery-grid cards-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:20px;">
+      
+      <!-- Facility 1 -->
+      <a href="facilities.html" class="facility-card">
+        <img src="images/iccu.jpg" alt="ICU">
+        <div class="overlay">ICCU</div>
+      </a>
+
+      <!-- Facility 2 -->
+      <a href="facilities.html" class="facility-card">
+        <img src="images/operation.jpg" alt="Operation Theatre">
+        <div class="overlay">Operation Theatre</div>
+      </a>
+
+      <!-- Facility 3 -->
+      <a href="facilities.html" class="facility-card">
+        <img src="images/lab.jpg" alt="Laboratory">
+        <div class="overlay">Laboratory</div>
+      </a>
+
+      <!-- Facility 4 -->
+      <a href="facilities.html" class="facility-card">
+        <img src="images/waiting.jpg" alt="Waiting Area">
+        <div class="overlay">Waiting Area</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.facility-card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+
+.facility-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.facility-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Overlay */
+.facility-card .overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 123, 255, 0.7); /* half-transparent blue overlay */
+  color: #fff;
+  text-align: center;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 0.4s ease;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+/* Show overlay on hover */
+.facility-card:hover .overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+
+
+  <!-- AD / CALL TO ACTION -->
+  <section class="ad-banner" style="background:white; color:#0077b6; text-align:center; padding:80px 20px;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="ad-card" style="
+      background:linear-gradient(135deg, #0077b6, #00aaff);
+      color:white;
+      border-radius:15px;
+      padding:60px 50px;
+      width:95%;           /* ⬅ Increased width for proportionate layout */
+      max-width:1100px;    /* ⬅ Matches testimonial/facility width */
+      margin:0 auto;
+      box-shadow:0 8px 25px rgba(0,0,0,0.15);
+    ">
+      <h2 style="font-size:34px; margin-bottom:20px; font-weight:700;">Book Your Health Checkup Today</h2>
+      <p style="font-size:18px; margin-bottom:35px; line-height:1.7; max-width:800px; margin-left:auto; margin-right:auto;">
+        Protect your loved ones with our <strong>preventive care packages</strong>. Early detection saves lives!
+      </p>
+      <a href="appointment.html" style="
+        display:inline-block;
+        padding:15px 40px;
+        background:white;
+        color:#0077b6;
+        font-weight:600;
+        text-decoration:none;
+        border-radius:30px;
+        transition:0.3s;
+      ">Book Now</a>
+    </div>
+  </div>
+</section>
+
+
+
+  <!-- CTA SECTION -->
+ <section class="cta section" style="background:white; color:#b30000; text-align:center; padding:80px 20px;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="cta-card" style="
+      background:#fff0f0;
+      border-top:6px solid #ff4d4d;
+      border-radius:15px;
+      padding:60px 50px;
+      width:95%;            /* ⬅ Wider inner box to match previous sections */
+      max-width:1100px;     /* ⬅ Same proportional width as testimonial/facility section */
+      margin:0 auto;
+      box-shadow:0 8px 25px rgba(0,0,0,0.1);
+    ">
+      <h2 style="font-size:34px; font-weight:700; margin-bottom:20px;">🚨 Need Emergency Care?</h2>
+      <p style="font-size:18px; margin-bottom:35px; line-height:1.7; max-width:800px; margin-left:auto; margin-right:auto;">
+        Our <strong>emergency department</strong> is open <strong>24/7</strong> with highly trained specialists ready to act fast.
+      </p>
+      <a href="contact_page.html" style="
+        display:inline-block;
+        padding:15px 40px;
+        background:#ff4d4d;
+        color:white;
+        font-weight:600;
+        text-decoration:none;
+        border-radius:30px;
+        transition:0.3s;
+      ">Contact Us Now</a>
+    </div>
+  </div>
+</section>
+
+
+
+  <!-- FOOTER -->
+<footer class="site-footer" style="
+  background: rgba(255, 255, 255, 0.1); 
+  backdrop-filter: blur(10px); 
+  -webkit-backdrop-filter: blur(10px);
+  padding:50px 20px; 
+  color:#333;">
+  
+  <div class="footer-container" style="
+    max-width:1200px; 
+    margin:0 auto; 
+    display:grid; 
+    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); 
+    gap:30px; 
+    text-align:left;">
+    
+    <!-- About -->
+    <div>
+      <h3 style="margin-bottom:15px; color:#222;">CarePlus Hospital</h3>
+      <p style="font-size:14px; line-height:1.6; color:#555;">
+        Delivering compassionate healthcare with modern facilities and expert doctors. 
+        Your health, our priority.
+      </p>
+    </div>
+    
+    <!-- Quick Links -->
+    <div>
+      <h3 style="margin-bottom:15px; color:#222;">Quick Links</h3>
+      <ul style="list-style:none; padding:0; margin:0; font-size:14px;">
+        <li style="margin-bottom:8px;"><a href="index.html" style="color:#007bff; text-decoration:none;">Home</a></li>
+        <li style="margin-bottom:8px;"><a href="services.html" style="color:#007bff; text-decoration:none;">Services</a></li>
+        <li style="margin-bottom:8px;"><a href="about.html" style="color:#007bff; text-decoration:none;">About Us</a></li>
+        <li style="margin-bottom:8px;"><a href="contact.html" style="color:#007bff; text-decoration:none;">Contact</a></li>
+      </ul>
+    </div>
+    
+    <!-- Contact -->
+    <div>
+      <h3 style="margin-bottom:15px; color:#222;">Contact Us</h3>
+      <p style="font-size:14px; margin:0; color:#555;">📍 123 Health Street, City</p>
+      <p style="font-size:14px; margin:5px 0; color:#555;">📞 +91 98765 43210</p>
+      <p style="font-size:14px; margin:0; color:#555;">✉️ info@careplus.com</p>
+    </div>
+    
+  </div>
+
+  <div style="text-align:center; margin-top:30px; font-size:13px; border-top:1px solid rgba(0,0,0,0.1); padding-top:20px; color:#444;">
+    &copy; <span id="year"></span> CarePlus Hospital. All rights reserved.
+  </div>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
+
+
+
